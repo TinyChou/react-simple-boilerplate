@@ -26,13 +26,62 @@ function getRandom(arr, n) {
   }
   return result
 }
+
+function getQueryString(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]); return null;
+}
+
+// params from url
+/*
+splash: true,
+
+currentIndex: 0,
+answers: [],
+
+rightCount: 0,
+score: 0,
+toggleRightAnswers: false,
+
+shareing: false,
+
+name: null,
+tel: null
+*/
+let pQuestions = getQueryString('questions')
+let pSplash = getQueryString('splash')
+let pCurrentIndex = getQueryString('currentIndex')
+let pAnswers = getQueryString('answers')
+let pRightCount = getQueryString('rightCount')
+let pScore = getQueryString('score')
+let pToggleRightAnswers = getQueryString('toggleRightAnswers')
+let pShareing = getQueryString('shareing')
+let pName = getQueryString('name')
+let pTel = getQueryString('tel')
+console.log(getQueryString('a'))
+
+// 如果是分享的链接，获取题目
+if (pQuestions) {
+  pQuestions = JSON.parse(pQuestions)
+  pSplash = JSON.parse(pSplash)
+  pCurrentIndex = JSON.parse(pCurrentIndex)
+  pAnswers = JSON.parse(pAnswers)
+  pRightCount = JSON.parse(pRightCount)
+  pScore = JSON.parse(pScore)
+  pToggleRightAnswers = JSON.parse(pToggleRightAnswers)
+  pShareing = JSON.parse(pShareing)
+  pName = pName
+  pTel = pTel
+}
+
 const questions = getRandom(qs, 10)
 
 const cssInJsApp = {
   bg: {
     width: '100%',
     height: '100%',
-    backgroundImage: `url("${imgIndexBg}")`,
+    backgroundImage: `url("${imgBg1}")`,
     backgroundSize: 'cover',
     position: 'absolute',
     textAlign: 'center'
@@ -260,6 +309,8 @@ class App extends Component {
               手机号：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ tel: e.target.value }) } }/>
               <div style={ cssInJsApp.view } onClick={ () => {
                 console.log(this.state.name, this.state.tel, this.state.score)
+
+                window.alert('提交成功!')
               } }>提交</div>
             </div>
           )}
