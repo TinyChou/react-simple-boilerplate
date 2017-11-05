@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "babel-loader": "^7.0.0",
+    "body-parser": "^1.18.2",
+    "jsonfile": "^4.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },

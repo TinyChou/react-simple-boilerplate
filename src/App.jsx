@@ -374,7 +374,18 @@ class App extends Component {
                   window.alert('电话长度不正确!')
                   return
                 }
-                window.alert('成功!')
+                // window.alert('成功!')
+                $.post('/submit', {
+                  name: this.state.name,
+                  tel: this.state.tel,
+                  score: this.state.score
+                }, function (result) {
+                  if (result.code == 100) {
+                    window.alert('成功!')
+                  } else {
+                    window.alert('失败!服务器出现异常...')
+                  }
+                });
               } }>提交</div>
             </div>
           )}
