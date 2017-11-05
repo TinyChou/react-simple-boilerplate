@@ -362,9 +362,18 @@ class App extends Component {
                 }
                 questionIds = JSON.stringify(questionIds)
                 // window.location.href = `index.html?questions=${questionIds}&splash=${this.state.splash}&currentIndex=${this.state.currentIndex}&answers=${JSON.stringify(this.state.answers)}&rightCount=${this.state.rightCount}&score=${this.state.score}&toggleRightAnswers=${this.state.toggleRightAnswers}&shareing=${this.state.shareing}&name=${this.state.name}&tel=${this.state.tel}`
-                if (!this.state.name) window.alert('名字不能为空!')
-                if (!this.state.tel) window.alert('电话不能为空!')
-                if (this.state.tel.length !== '18812345678'.length) window.alert('电话长度不正确!')
+                if (!this.state.name) {
+                  window.alert('名字不能为空!')
+                  return
+                }
+                if (!this.state.tel) {
+                  window.alert('电话不能为空!')
+                  return
+                }
+                if (this.state.tel.length !== '18812345678'.length) {
+                  window.alert('电话长度不正确!')
+                  return
+                }
                 window.alert('成功!')
               } }>提交</div>
             </div>
