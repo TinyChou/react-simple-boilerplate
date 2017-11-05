@@ -457,14 +457,14 @@ const cssInJsSplash = {
 
   sloganLeft: {
     position: 'absolute',
-    top: '5rem',
+    top: '40rem',
     transform: 'translateX(-50%)',
     animation: '1s splash_slogan_one'
   },
 
   sloganRight: {
     position: 'absolute',
-    top: '10rem',
+    top: '50rem',
     transform: 'translateX(-50%)',
     animation: '1s splash_slogan_two'
   },
