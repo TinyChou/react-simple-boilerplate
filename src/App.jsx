@@ -59,7 +59,6 @@ let pToggleRightAnswers = getQueryString('toggleRightAnswers')
 let pShareing = getQueryString('shareing')
 let pName = getQueryString('name')
 let pTel = getQueryString('tel')
-console.log(getQueryString('a'))
 
 // 如果是分享的链接，获取题目
 if (pQuestions) {
@@ -73,9 +72,28 @@ if (pQuestions) {
   pShareing = JSON.parse(pShareing)
   pName = pName
   pTel = pTel
+
+  let q = []
+  for (let i = 0; i < qs.length; i++) {
+    if (pQuestions.indexOf(qs[i].id) >= 0) {
+      q.push(qs[i])
+    }
+  }
+  pQuestions = q
+
+  console.log(pQuestions)
+  console.log(pSplash)
+  console.log(pCurrentIndex)
+  console.log(pAnswers)
+  console.log(pRightCount)
+  console.log(pScore)
+  console.log(pToggleRightAnswers)
+  console.log(pShareing)
+  console.log(pName)
+  console.log(pTel)
 }
 
-const questions = getRandom(qs, 10)
+let questions = pQuestions ? pQuestions : getRandom(qs, 10)
 
 const cssInJsApp = {
   bg: {
@@ -168,6 +186,18 @@ const cssInJsApp = {
     height: '2rem',
     border: '1px black solid',
     fontSize: '2rem'
+  },
+  submit: {
+    width: '20rem',
+    height: '10rem',
+    backgroundColor: '#d73d3d',
+    borderRadius: '1.5rem',
+    color: 'white',
+    fontSize: '6rem',
+    textAlign: 'center',
+    margin: '0 auto',
+    marginTop: '2rem',
+    fontWeight: 'bold'
   }
 }
 class App extends Component {
@@ -182,20 +212,21 @@ class App extends Component {
     this.onToggleRight = this.onToggleRight.bind(this)
     this.renderRightAnswers = this.renderRightAnswers.bind(this)
 
+    const hasParams = !!pQuestions
     this.state = {
-      splash: true,
+      splash: hasParams ? pSplash : true,
 
-      currentIndex: 0,
-      answers: [],
+      currentIndex: hasParams ? pCurrentIndex : 0,
+      answers: hasParams ? pAnswers : [],
 
-      rightCount: 0,
-      score: 0,
-      toggleRightAnswers: false,
+      rightCount: hasParams ? pRightCount : 0,
+      score: hasParams ? pScore : 0,
+      toggleRightAnswers: hasParams ? pToggleRightAnswers : false,
 
-      shareing: false,
+      shareing: hasParams ? pShareing : false,
 
-      name: null,
-      tel: null
+      name: hasParams ? pName : null,
+      tel: hasParams ? pTel : null
     }
   }
 
@@ -303,14 +334,23 @@ class App extends Component {
           <div style={ cssInJsApp.divider }></div>
           { this.state.toggleRightAnswers ? '' : (
             <div style={ cssInJsApp.answers }>
-              <div style={ cssInJsApp.view } onClick={ () => { this.setState({ shareing: true }) } }>让朋友也来参加</div>
-              <br/><br/>秀出我的成绩单<br/><br/>
-              您的名字：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ name: e.target.value }) }}/><br/><br/>
-              手机号：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ tel: e.target.value }) } }/>
               <div style={ cssInJsApp.view } onClick={ () => {
+                 document.title = `这是来自武汉公安青年的一份测试，我答对了${this.state.rightCount}道题，你敢来挑战吗？`
+                 this.setState({ shareing: true })
+               } }>秀出我的成绩单</div>
+              <br/><br/>填写资料即有机会赢取好礼<br/><br/>
+              您的名字：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ name: e.target.value }) }}/><br/><br/>
+              您的手机号：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ tel: e.target.value }) } }/>
+              <div style={ cssInJsApp.submit } onClick={ () => {
                 console.log(this.state.name, this.state.tel, this.state.score)
 
-                window.alert('提交成功!')
+                let questionIds = []
+                for (let i = 0; i < questions.length; i++) {
+                  questionIds.push(questions[i].id)
+                }
+                questionIds = JSON.stringify(questionIds)
+                // window.location.href = `index.html?questions=${questionIds}&splash=${this.state.splash}&currentIndex=${this.state.currentIndex}&answers=${JSON.stringify(this.state.answers)}&rightCount=${this.state.rightCount}&score=${this.state.score}&toggleRightAnswers=${this.state.toggleRightAnswers}&shareing=${this.state.shareing}&name=${this.state.name}&tel=${this.state.tel}`
+                
               } }>提交</div>
             </div>
           )}
