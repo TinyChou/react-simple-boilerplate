@@ -494,13 +494,16 @@ class SplashScreen extends Component {
     super(props)
   }
 
+  /*
+  <img style={ cssInJsSplash.paper } src={ imgCircle2 } />
+  <img style={ cssInJsSplash.pen } src={ imgIndex1 } />
+  */
   render() {
     return (
       <div style={ cssInJsSplash.bg }>
         <img style={ cssInJsSplash.sloganLeft } src={ img1 } />
         <img style={ cssInJsSplash.sloganRight } src={ img2 } />
-        <img style={ cssInJsSplash.paper } src={ imgCircle2 } />
-        <img style={ cssInJsSplash.pen } src={ imgIndex1 } />
+
         <img style={ cssInJsSplash.start } src={ imgBeginTest } onClick={ this.props.onStartTap }/>
       </div>
     )
