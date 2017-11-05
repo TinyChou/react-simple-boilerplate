@@ -187,16 +187,28 @@ const cssInJsApp = {
     border: '1px black solid',
     fontSize: '2rem'
   },
-  submit: {
-    width: '20rem',
-    height: '10rem',
+  show: {
+    width: '30rem',
+    height: '5rem',
     backgroundColor: '#d73d3d',
     borderRadius: '1.5rem',
     color: 'white',
-    fontSize: '6rem',
+    fontSize: '3rem',
     textAlign: 'center',
     margin: '0 auto',
-    marginTop: '2rem',
+    marginTop: '3.5rem',
+    fontWeight: 'bold'
+  },
+  submit: {
+    width: '20rem',
+    height: '6rem',
+    backgroundColor: '#d73d3d',
+    borderRadius: '1.5rem',
+    color: 'white',
+    fontSize: '4rem',
+    textAlign: 'center',
+    margin: '0 auto',
+    marginTop: '3.5rem',
     fontWeight: 'bold'
   }
 }
@@ -324,8 +336,8 @@ class App extends Component {
         <div style={ cssInJsApp.boxBg }></div>
         <div style={ Object.assign(cssInJsApp.boxFg, { }) }>
           <div style={ Object.assign(cssInJsApp.question, { textAlign: 'center' }) }>
-            你答对了{this.state.rightCount}题<br/>
-            共得分{this.state.score}分
+            你答对了<font color="red" style={ { fontSize: '200%' } }>{this.state.rightCount}</font>题<br/>
+            共得分<font color="red" style={ { fontSize: '200%' } }>{this.state.score}</font>分
             <div style={ cssInJsApp.view } onClick={ this.onToggleRight }>正确答案</div>
             <div style={ { textAlign: 'start' } }>
               { this.state.toggleRightAnswers ? this.renderRightAnswers(): ''}
@@ -334,7 +346,7 @@ class App extends Component {
           <div style={ cssInJsApp.divider }></div>
           { this.state.toggleRightAnswers ? '' : (
             <div style={ cssInJsApp.answers }>
-              <div style={ cssInJsApp.view } onClick={ () => {
+              <div style={ cssInJsApp.show } onClick={ () => {
                  document.title = `这是来自武汉公安青年的一份测试，我答对了${this.state.rightCount}道题，你敢来挑战吗？`
                  this.setState({ shareing: true })
                } }>秀出我的成绩单</div>
@@ -350,7 +362,10 @@ class App extends Component {
                 }
                 questionIds = JSON.stringify(questionIds)
                 // window.location.href = `index.html?questions=${questionIds}&splash=${this.state.splash}&currentIndex=${this.state.currentIndex}&answers=${JSON.stringify(this.state.answers)}&rightCount=${this.state.rightCount}&score=${this.state.score}&toggleRightAnswers=${this.state.toggleRightAnswers}&shareing=${this.state.shareing}&name=${this.state.name}&tel=${this.state.tel}`
-                
+                if (!this.state.name) window.alert('名字不能为空!')
+                if (!this.state.tel) window.alert('电话不能为空!')
+                if (this.state.tel.length !== '18812345678'.length) window.alert('电话长度不正确!')
+                window.alert('成功!')
               } }>提交</div>
             </div>
           )}
@@ -377,7 +392,7 @@ class App extends Component {
     }
 
     return (
-      <div style={ { height: '52rem', overflow: 'auto' } }>
+      <div style={ { height: '45rem', overflow: 'auto' } }>
         { children }
       </div>
     )
