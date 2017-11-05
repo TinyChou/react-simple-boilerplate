@@ -1,3 +1,36 @@
 h1 {
   color: tomato;
 }
+
+body, html {
+  margin: 0
+}
+
+@keyframes splash_slogan_one {
+  0% { top: -10rem; }
+  100% { top: 5rem; }
+}
+
+@keyframes splash_slogan_two {
+  0% { top: -5rem; }
+  100% { top: 10rem; }
+}
+
+@keyframes splash_paper {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes splash_pen {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes splash_start {
+  0% { zoom: 1; }
+  100% { zoom: 1.2; }
+}
+
+div.item:active {
+  background-color: #888888;
+}
