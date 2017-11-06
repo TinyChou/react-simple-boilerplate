@@ -16,30 +16,32 @@ app.listen(80, function () {
 })
 
 app.post('/submit', function(req, res) {
-  console.log(req.body.name, req.body.tel, req.body.score);
+  console.log(req.body.name, req.body.tel, req.body.score, req.body.company);
 
   const name = req.body.name;
   const tel = req.body.tel;
   const score = req.body.score;
-  write(name, tel, score, function () {
+  const company = req.body.company;
+  write(name, tel, score, company, function () {
     res.setHeader('Content-Type', 'text/json; charset=utf-8');
     res.write(JSON.stringify({ status: 'success', code: 100 }));
     res.end();
   }, function () {
     res.setHeader('Content-Type', 'text/json; charset=utf-8');
-    res.write(JSON.stringify({ status: 'failed', code: '-1' }));
+    res.write(JSON.stringify({ status: 'failed', code: -1 }));
     res.end();
   });
 })
 
-function write(name, tel, score, ok, fail) {
+function write(name, tel, score, company, ok, fail) {
   const jsonFile = './data/' + today() + '.json';
   // jsonfile.read
   read(function (arr) {
     arr.push({
       name: name,
       tel: tel,
-      score: score
+      score: score,
+      company: company
     }); // insert it
 
     jsonfile.writeFile(jsonFile, arr, function (err) {

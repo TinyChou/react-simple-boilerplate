@@ -59,6 +59,7 @@ let pToggleRightAnswers = getQueryString('toggleRightAnswers')
 let pShareing = getQueryString('shareing')
 let pName = getQueryString('name')
 let pTel = getQueryString('tel')
+let pCompany = getQueryString('company')
 
 // 如果是分享的链接，获取题目
 if (pQuestions) {
@@ -72,6 +73,7 @@ if (pQuestions) {
   pShareing = JSON.parse(pShareing)
   pName = pName
   pTel = pTel
+  pCompany = pCompany
 
   let q = []
   for (let i = 0; i < qs.length; i++) {
@@ -91,6 +93,7 @@ if (pQuestions) {
   console.log(pShareing)
   console.log(pName)
   console.log(pTel)
+  console.log(pCompany)
 }
 
 let questions = pQuestions ? pQuestions : getRandom(qs, 10)
@@ -200,7 +203,7 @@ const cssInJsApp = {
     fontWeight: 'bold'
   },
   submit: {
-    width: '20rem',
+    width: '12rem',
     height: '6rem',
     backgroundColor: '#d73d3d',
     borderRadius: '1.5rem',
@@ -238,7 +241,8 @@ class App extends Component {
       shareing: hasParams ? pShareing : false,
 
       name: hasParams ? pName : null,
-      tel: hasParams ? pTel : null
+      tel: hasParams ? pTel : null,
+      company: hasParams ? pCompany : null
     }
   }
 
@@ -346,15 +350,17 @@ class App extends Component {
           <div style={ cssInJsApp.divider }></div>
           { this.state.toggleRightAnswers ? '' : (
             <div style={ cssInJsApp.answers }>
-              <div style={ cssInJsApp.show } onClick={ () => {
+              <div style={ Object.assign(cssInJsApp.show, { marginTop: '0' }) } onClick={ () => {
                  document.title = `我在武汉公安青年学习十九大精神网络知识竞赛中得了${this.state.score}分，一起来学习吧！`
                  this.setState({ shareing: true })
                } }>秀出我的成绩单</div>
-              <br/><br/>完善资料赢取神秘礼品<br/><br/>
-              您的名字：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ name: e.target.value }) }}/><br/><br/>
-              您的手机号：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ tel: e.target.value }) } }/>
-              <div style={ cssInJsApp.submit } onClick={ () => {
-                console.log(this.state.name, this.state.tel, this.state.score)
+              <br/>11月6日至15日，“武汉公安青年”将每天选取10份完善个人资料的满分答卷，送出“十九大安保卫士荣誉勋章”或神秘礼品。<br/><br/>
+              完善个人资料<br/>
+              您的名字：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ name: e.target.value }) }}/><br/>
+              您的电话：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ tel: e.target.value }) } }/><br/>
+              工作单位：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ company: e.target.value })} }/><br/>
+              <div style={ Object.assign({}, cssInJsApp.submit, { display: 'inline-block', marginLeft: '10rem' }) } onClick={ () => {
+                console.log(this.state.name, this.state.tel, this.state.score, this.state.company)
 
                 let questionIds = []
                 for (let i = 0; i < questions.length; i++) {
@@ -370,6 +376,10 @@ class App extends Component {
                   window.alert('电话不能为空!')
                   return
                 }
+                if (!this.state.company) {
+                  window.alert('工作单位不能为空!')
+                  return
+                }
                 if (this.state.tel.length !== '18812345678'.length) {
                   window.alert('电话长度不正确!')
                   return
@@ -378,7 +388,8 @@ class App extends Component {
                 $.post('/submit', {
                   name: this.state.name,
                   tel: this.state.tel,
-                  score: this.state.score
+                  score: this.state.score,
+                  company: this.state.company
                 }, function (result) {
                   if (result.code == 100) {
                     window.alert('成功!')
@@ -387,6 +398,7 @@ class App extends Component {
                   }
                 });
               } }>提交</div>
+              <div style={ Object.assign({}, cssInJsApp.submit, { height: '3rem', fontSize: '2rem', marginTop: '0', display: 'inline-block', marginLeft: '2rem' }) } onClick={ () => { window.location.href = 'https://mp.weixin.qq.com/s/ohQHmxKW-BPloiSHjO01Fw' } }>获奖名单</div>
             </div>
           )}
         </div>
