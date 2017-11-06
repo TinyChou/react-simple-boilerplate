@@ -798,7 +798,7 @@ eval("module.exports = __webpack_require__.p + \"f0162b489079062f1cb6827805bcaf5
 /* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"f982f471998bcd6fc0b9537bd074bc97.jpg\";\n\n//////////////////\n// WEBPACK FOOTER\n// ./images/bg1.jpg\n// module id = 105\n// module chunks = 0\n\n//# sourceURL=webpack:///./images/bg1.jpg?");
+eval("module.exports = __webpack_require__.p + \"d63d8505ef78b8cc7ffd10653c72e3d4.jpg\";\n\n//////////////////\n// WEBPACK FOOTER\n// ./images/bg1.jpg\n// module id = 105\n// module chunks = 0\n\n//# sourceURL=webpack:///./images/bg1.jpg?");
 
 /***/ }),
 /* 106 */
