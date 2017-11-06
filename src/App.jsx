@@ -350,7 +350,7 @@ class App extends Component {
                  document.title = `这是来自武汉公安青年的一份测试，我答对了${this.state.rightCount}道题，你敢来挑战吗？`
                  this.setState({ shareing: true })
                } }>秀出我的成绩单</div>
-              <br/><br/>填写资料即有机会赢取好礼<br/><br/>
+              <br/><br/>完善资料赢取神秘礼品<br/><br/>
               您的名字：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ name: e.target.value }) }}/><br/><br/>
               您的手机号：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ tel: e.target.value }) } }/>
               <div style={ cssInJsApp.submit } onClick={ () => {
