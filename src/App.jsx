@@ -347,7 +347,7 @@ class App extends Component {
           { this.state.toggleRightAnswers ? '' : (
             <div style={ cssInJsApp.answers }>
               <div style={ cssInJsApp.show } onClick={ () => {
-                 document.title = `我在武汉公安青年学习十九大精神网络知识竞赛中答对了${this.state.rightCount}道题，一起来学习吧！`
+                 document.title = `我在武汉公安青年学习十九大精神网络知识竞赛中得了${this.state.score}分，一起来学习吧！`
                  this.setState({ shareing: true })
                } }>秀出我的成绩单</div>
               <br/><br/>完善资料赢取神秘礼品<br/><br/>
