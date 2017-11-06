@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import img1 from '../images/1.png'
 import img2 from '../images/2.png'
-import imgBg1 from '../images/bg1.jpg'
+import imgBg1 from '../images/bg1.png'
 import imgCircle2 from '../images/circle2.png'
 import imgIndex1 from '../images/index1.png'
 import imgBeginTest from '../images/begin-test.png'
