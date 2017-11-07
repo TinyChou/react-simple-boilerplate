@@ -354,7 +354,7 @@ class App extends Component {
                  document.title = `我在武汉公安青年学习十九大精神网络知识竞赛中得了${this.state.score}分，一起来学习吧！`
                  this.setState({ shareing: true })
                } }>秀出我的成绩单</div>
-              <br/>11月6日至15日，“武汉公安青年”将每天选取10份完善个人资料的满分答卷，送出“十九大安保卫士荣誉勋章”或神秘礼品。<br/><br/>
+              <br/>11月7日至16日，“武汉公安青年”将每天选取10份完善个人资料的满分答卷，送出“十九大安保卫士荣誉勋章”或神秘礼品。<br/><br/>
               完善个人资料<br/>
               您的名字：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ name: e.target.value }) }}/><br/>
               您的电话：<input style={ cssInJsApp.input } onChange={ (e) => { this.setState({ tel: e.target.value }) } }/><br/>
